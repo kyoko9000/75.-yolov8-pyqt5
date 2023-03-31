@@ -25,7 +25,6 @@ class MainWindow(QMainWindow):
     # def closeEvent(self, event):
     #     self.stop_capture_video()
 
-
     def start_capture_video(self):
         self.thread[1] = live_stream(index=1)
         self.thread[1].start()

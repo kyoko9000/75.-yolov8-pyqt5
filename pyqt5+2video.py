@@ -22,17 +22,17 @@ class MainWindow(QMainWindow):
         self.count = 2
 
     def start_capture_video(self):
-        for i in range(1, self.count+1):
+        for i in range(self.count):
             self.thread[i] = live_stream(index=i)
             self.thread[i].start()
             self.thread[i].signal.connect(self.show_wedcam)
 
     def show_wedcam(self, cv_img, index):
         """Updates the image_label with a new opencv image"""
-        if index == 1:
+        if index == 0:
             qt_img = convert_cv_qt(cv_img)
             self.uic.label_1.setPixmap(qt_img)
-        elif index == 2:
+        elif index == 1:
             qt_img = convert_cv_qt(cv_img)
             self.uic.label_2.setPixmap(qt_img)
 

@@ -15,7 +15,6 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.uic = Ui_MainWindow()
         self.uic.setupUi(self)
-
         self.uic.Button_start.clicked.connect(self.start_capture_video)
 
         self.thread = {}
@@ -43,7 +42,7 @@ def convert_cv_qt(cv_img):
     h, w, ch = rgb_image.shape
     bytes_per_line = ch * w
     convert_to_Qt_format = QtGui.QImage(rgb_image.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888)
-    p = convert_to_Qt_format.scaled(300, 200, Qt.KeepAspectRatio)
+    p = convert_to_Qt_format.scaled(700, 500, Qt.KeepAspectRatio)
     return QPixmap.fromImage(p)
 
 

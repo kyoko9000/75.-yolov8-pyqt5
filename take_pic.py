@@ -5,6 +5,7 @@ from PyQt5 import QtGui
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow
+from ultralytics import YOLO
 
 from gui1 import Ui_MainWindow
 
@@ -62,19 +63,19 @@ class live_stream(QThread):
         self.pic = False
 
     def run(self):
-        cap = cv2.VideoCapture("video1.mp4")
+        model = YOLO("yolov8n.pt")  # load a pretrained model (recommended for training)
+        results = model('video0.mp4', show=True, stream=True)  # List of Results objects
 
-        while True:
-            # Capture frame-by-frame
-            ret, frame = cap.read()
+        for result, frame in results:
+            # boxes = result[0].boxes.numpy()  # Boxes object for bbox outputs
+            # for box in boxes:  # there could be more than one detection
+            #     print("class", box.cls)
+            #     print("xyxy", box.xyxy)
+            #     print("conf", box.conf)
             self.signal.emit(frame)
             if self.pic:
                 self.signal_1.emit(frame)
                 self.pic = False
-
-        # When everything done, release the capture
-        cap.release()
-        cv2.destroyAllWindows()
 
     def take_pic(self):
         self.pic = True

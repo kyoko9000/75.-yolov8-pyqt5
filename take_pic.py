@@ -80,7 +80,6 @@ class live_stream(QThread):
         self.pic = True
 
 
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     main_win = MainWindow()

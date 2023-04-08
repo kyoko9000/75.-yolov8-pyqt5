@@ -1,12 +1,10 @@
 import sys
 import cv2
-import numpy as np
 from PyQt5.QtCore import Qt
 from PyQt5 import QtGui
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from ultralytics import YOLO
 
 from gui1 import Ui_MainWindow
 
@@ -73,7 +71,6 @@ class live_stream(QThread):
             if self.pic:
                 self.signal_1.emit(frame)
                 self.pic = False
-                print(self.pic)
 
         # When everything done, release the capture
         cap.release()

@@ -1,5 +1,6 @@
 import sys
 import cv2
+import numpy as np
 from PyQt5.QtCore import Qt
 from PyQt5 import QtGui
 from PyQt5.QtCore import QThread, pyqtSignal
@@ -17,7 +18,7 @@ class MainWindow(QMainWindow):
         self.uic.setupUi(self)
 
         self.uic.Button_start.clicked.connect(self.start_capture_video)
-        self.uic.Button_stop.clicked.connect(self.take_pics)
+        self.uic.Button_take.clicked.connect(self.take_pics)
 
         self.thread = {}
 
@@ -31,7 +32,6 @@ class MainWindow(QMainWindow):
         self.thread[1].signal_1.connect(self.show_pic)
 
     def show_pic(self, pic):
-        # cv2.imshow('frame', pic)
         qt_img = self.convert_cv_qt(pic)
         self.uic.label_2.setPixmap(qt_img)
 
@@ -41,14 +41,14 @@ class MainWindow(QMainWindow):
         self.uic.label_1.setPixmap(qt_img)
 
     def convert_cv_qt(self, cv_img):
-        label_W = self.uic.label_1.width()
-        label_H = self.uic.label_1.height()
+        label_h = self.uic.label_1.height()
+        lebel_w = self.uic.label_1.width()
         """Convert from an opencv image to QPixmap"""
         rgb_image = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
         h, w, ch = rgb_image.shape
         bytes_per_line = ch * w
         convert_to_Qt_format = QtGui.QImage(rgb_image.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888)
-        p = convert_to_Qt_format.scaled(label_W, label_H, Qt.KeepAspectRatio)
+        p = convert_to_Qt_format.scaled(lebel_w, label_h, Qt.KeepAspectRatio)
         return QPixmap.fromImage(p)
 
 
@@ -57,16 +57,21 @@ class live_stream(QThread):
     signal_1 = pyqtSignal(object)
 
     def __init__(self, index):
+        self.pic = False
         self.index = index
         print("start threading", self.index)
         super(live_stream, self).__init__()
-        self.pic = False
 
     def run(self):
         model = YOLO("yolov8n.pt")  # load a pretrained model (recommended for training)
-        results = model('video0.mp4', show=True, stream=True)  # List of Results objects
+        results = model('video.mp4', show=True, stream=True)  # List of Results objects
+
+        # def show_frame():
+        #     cv2.imshow("show", frame)
+        #     cv2.waitKey(1)
 
         for result, frame in results:
+            # show_frame()
             # boxes = result[0].boxes.numpy()  # Boxes object for bbox outputs
             # for box in boxes:  # there could be more than one detection
             #     print("class", box.cls)

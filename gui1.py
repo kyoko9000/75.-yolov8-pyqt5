@@ -30,12 +30,12 @@ class Ui_MainWindow(object):
         font.setPointSize(20)
         self.Button_start.setFont(font)
         self.Button_start.setObjectName("Button_start")
-        self.Button_stop = QtWidgets.QPushButton(self.centralwidget)
-        self.Button_stop.setGeometry(QtCore.QRect(420, 280, 131, 61))
+        self.Button_take = QtWidgets.QPushButton(self.centralwidget)
+        self.Button_take.setGeometry(QtCore.QRect(420, 280, 131, 61))
         font = QtGui.QFont()
         font.setPointSize(20)
-        self.Button_stop.setFont(font)
-        self.Button_stop.setObjectName("Button_stop")
+        self.Button_take.setFont(font)
+        self.Button_take.setObjectName("Button_take")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(370, 0, 331, 251))
         self.label_2.setFrameShape(QtWidgets.QFrame.Box)
@@ -59,7 +59,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.Button_start.setText(_translate("MainWindow", "Start"))
-        self.Button_stop.setText(_translate("MainWindow", "Stop"))
+        self.Button_take.setText(_translate("MainWindow", "Pic"))
 
 
 if __name__ == "__main__":

@@ -26,6 +26,14 @@ while cap.isOpened():
         # Break the loop if 'q' is pressed
         if cv2.waitKey(1) & 0xFF == ord("q"):
             break
+
+        for result in results:
+            boxes = result[0].boxes.numpy()  # Boxes object for bbox outputs
+            for box in boxes:  # there could be more than one detection
+                print("class", box.cls)
+                print("xyxy", box.xyxy)
+                print("conf", box.conf)
+
     else:
         # Break the loop if the end of the video is reached
         break

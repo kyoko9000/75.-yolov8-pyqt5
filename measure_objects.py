@@ -18,10 +18,26 @@ def measure(result, frame):
     image = cv2.line(frame, start_point, end_point, color, thickness)
 
     boxes = result[0].boxes.numpy()  # Boxes object for bbox outputs
+
     for box in boxes:  # there could be more than one detection
         print("class", box.cls)
         print("xyxy", box.xyxy)
         print("conf", box.conf)
+
+    # font
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    # org
+    org = (50, 50)
+    # fontScale
+    fontScale = 1
+    # Blue color in BGR
+    color = (255, 0, 0)
+    # Line thickness of 2 px
+    thickness = 2
+
+    # Using cv2.putText() method
+    image = cv2.putText(image, str(box.xyxy), org, font,
+                        fontScale, color, thickness, cv2.LINE_AA)
 
     return image
 

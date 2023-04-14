@@ -25,9 +25,6 @@ while cap.isOpened():
         # Display the annotated frame
         cv2.imshow("YOLOv8 Inference", annotated_frame)
 
-        # draw_frame = measure(annotated_frame)
-        # cv2.imshow("YOLOv8 Inference", draw_frame)
-
         # Break the loop if 'q' is pressed
         if cv2.waitKey(1) & 0xFF == ord("q"):
             break

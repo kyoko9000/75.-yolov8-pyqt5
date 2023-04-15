@@ -17,14 +17,9 @@ def measure(result, frame):
     image = cv2.line(frame, start_point, end_point, color, thickness)
 
     boxes = result[0].boxes.numpy()  # Boxes object for bbox outputs
-    for box in boxes:  # there could be more than one detection
-        print("class", box.cls)
-        print("xyxy", box.xyxy)
-        print("conf", box.conf)
+
     # font
     font = cv2.FONT_HERSHEY_SIMPLEX
-    # org
-    org = (50, 50)
     # fontScale
     fontScale = 1
     # Blue color in BGR
@@ -32,8 +27,24 @@ def measure(result, frame):
     # Line thickness of 2 px
     thickness = 2
     # Using cv2.putText() method
-    image = cv2.putText(image, str(box.xyxy), org, font,
-                        fontScale, color, thickness, cv2.LINE_AA)
+    for box in boxes:  # there could be more than one detection
+        # print("class", box.cls)
+        # print("xyxy", box.xyxy)
+        # print("conf", box.conf)
+
+        x1 = int(box.xyxy[0][0])
+        y1 = int(box.xyxy[0][1])
+        x2 = int(box.xyxy[0][2])
+        y2 = int(box.xyxy[0][3])
+
+        if 180 < y1 < 192:
+            position = (x1, y2 + 30)
+            w = x2 - x1
+            h = y2 - y1
+            text = f"w{w} h{h}"
+            print("text", text)
+            image = cv2.putText(image, text, position, font,
+                            fontScale, color, thickness, cv2.LINE_AA)
 
     return image
 

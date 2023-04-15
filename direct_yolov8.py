@@ -1,8 +1,6 @@
 import cv2
 from ultralytics import YOLO
 
-from measure_objects import measure
-
 # Load the YOLOv8 model
 model = YOLO('yolov8n.pt')
 

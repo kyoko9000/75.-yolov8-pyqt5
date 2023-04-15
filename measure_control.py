@@ -9,8 +9,7 @@ results = model('video1.mp4', show=True, stream=True)  # List of Results objects
 
 def show_frame():
     draw_frame = measure(result, frame)
-    cv2.imshow("YOLOv8 Inference", draw_frame)
-    # cv2.imshow("show", frame)
+    cv2.imshow("show", draw_frame)
     cv2.waitKey(1)
 
 

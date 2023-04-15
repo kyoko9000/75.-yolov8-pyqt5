@@ -6,6 +6,7 @@ def measure(result, frame):
 
     # Start coordinate, here (0, 0)
     start_point = (int(1/3*width), int(1/4*height))
+    print("int(1/4*height)", int(1/4*height))
     # End coordinate, here (250, 250)
     end_point = (int(2/3*width), int(1/4*height))
     # Green color in BGR
@@ -27,6 +28,8 @@ def measure(result, frame):
     # Line thickness of 2 px
     thickness = 2
     # Using cv2.putText() method
+    ratio = round((2000/104), 2)
+    print("ratio", ratio)
     for box in boxes:  # there could be more than one detection
         # print("class", box.cls)
         # print("xyxy", box.xyxy)
@@ -37,14 +40,16 @@ def measure(result, frame):
         x2 = int(box.xyxy[0][2])
         y2 = int(box.xyxy[0][3])
 
-        if 180 < y1 < 192:
+        if 192 > y1 > 185:
             position = (x1, y2 + 30)
             w = x2 - x1
-            h = y2 - y1
-            text = f"w{w} h{h}"
+            h = y2 - y1 + 50
+            # change pixel to mm
+            text = f"W:{round(w*ratio, 2)}mm L:{round(h*ratio, 2)}mm"
             print("text", text)
+            print("w", w, "l", h)
             image = cv2.putText(image, text, position, font,
-                            fontScale, color, thickness, cv2.LINE_AA)
+                                fontScale, color, thickness, cv2.LINE_AA)
 
     return image
 

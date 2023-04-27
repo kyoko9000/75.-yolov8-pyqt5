@@ -5,8 +5,7 @@ from ultralytics import YOLO
 model = YOLO('yolov8n.pt')
 
 # Open the video file
-video_path = "video1.mp4"
-cap = cv2.VideoCapture(video_path)
+cap = cv2.VideoCapture("video1.mp4")
 
 # Loop through the video frames
 while cap.isOpened():
@@ -28,7 +27,8 @@ while cap.isOpened():
             break
 
         for result in results:
-            boxes = result[0].boxes.numpy()  # Boxes object for bbox outputs
+            boxes = result.boxes.numpy()  # Boxes object for bbox outputs
+            print("boxes", boxes)
             for box in boxes:  # there could be more than one detection
                 print("class", box.cls)
                 print("xyxy", box.xyxy)

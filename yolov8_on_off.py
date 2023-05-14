@@ -1,5 +1,6 @@
 import sys
 import cv2
+import numpy as np
 from PyQt5.QtCore import Qt
 from PyQt5 import QtGui
 from PyQt5.QtCore import QThread, pyqtSignal
@@ -15,6 +16,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.uic = Ui_MainWindow()
         self.uic.setupUi(self)
+
         self.uic.Button_start.clicked.connect(self.start_capture_video)
         self.uic.Button_stop.clicked.connect(self.stop_capture_video)
 
@@ -45,7 +47,7 @@ def convert_cv_qt(cv_img):
 
 
 class live_stream(QThread):
-    signal = pyqtSignal(object)
+    signal = pyqtSignal(np.ndarray)
 
     def __init__(self, index):
         self.stop_ = False
@@ -58,8 +60,7 @@ class live_stream(QThread):
         model = YOLO('yolov8n.pt')
 
         # Open the video file
-        video_path = "video.mp4"
-        cap = cv2.VideoCapture(video_path)
+        cap = cv2.VideoCapture("video1.mp4")
 
         # Loop through the video frames
         while cap.isOpened():
@@ -76,7 +77,16 @@ class live_stream(QThread):
                 # Break the loop if 'q' is pressed
                 if self.stop_:
                     break
+
+                # for result in results:
+                #     boxes = result.boxes.numpy()  # Boxes object for bbox outputs
+                #     print("boxes", boxes)
+                #     for box in boxes:  # there could be more than one detection
+                #         print("class", box.cls)
+                #         print("xyxy", box.xyxy)
+                #         print("conf", box.conf)
                 self.signal.emit(annotated_frame)
+
             else:
                 # Break the loop if the end of the video is reached
                 break

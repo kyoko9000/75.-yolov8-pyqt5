@@ -1,4 +1,4 @@
-class a():
+class a:
     def __init__(self):
         super().__init__()
         self.list_1 = [0, 1, 2]

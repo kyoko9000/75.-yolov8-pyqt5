@@ -6,7 +6,7 @@ model = YOLO('yolov8n.pt')
 
 # Open the video file
 cap = cv2.VideoCapture("video1.mp4")
-
+count = 0
 # Loop through the video frames
 while cap.isOpened():
     # Read a frame from the video
@@ -29,8 +29,12 @@ while cap.isOpened():
                 y2 = int(box.xyxy[0][3])
 
                 print("xyxy", box.xyxy)
-                if 192 > y1 > 185:
-                    print("ok")
+                if 195 > y1 > 185:
+                    crop_img = annotated_frame[y1:y2, x1:x2]
+                    # cv2.imshow("cropped", crop_img)
+                    # cv2.waitKey(1)
+                    count += 1
+                    cv2.imwrite(f"save_crop/savedImage{count}.jpg", crop_img)
 
         cv2.imshow("cv2", annotated_frame)
         cv2.waitKey(1)

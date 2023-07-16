@@ -13,8 +13,8 @@ for result, frame1, frame in results:
             x2 = int(box.xyxy[0][2])
             y2 = int(box.xyxy[0][3])
             if box.id is not None:
-                print("id", int(box.id[0]))
-                if y1 < 185 and int(box.id[0]) == count:
+                id = int(box.id[0])
+                if y1 < 185 and id == count:
                     crop_img = frame[y1:y2, x1:x2]
                     cv2.imwrite(f"save_crop/savedImage{count}.jpg", crop_img)
                     count += 1

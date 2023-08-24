@@ -4,10 +4,9 @@ from ultralytics import SAM
 SAM_model = SAM('sam_b.pt')
 image_path = 'images/6_0.jpg'
 image_name = image_path.split("/")[-1][:-4]
-print(image_name)
 clas = 50
 # Run inference with points prompt
-results = SAM_model(image_path, bboxes=[150, 300, 900, 550], show=True)
+results = SAM_model(image_path, bboxes=[150, 300, 900, 550], save=True)
 
 segments = results[0].masks.xyn
 with open(f'labels/{image_name}.txt', 'w') as f:

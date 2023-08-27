@@ -131,8 +131,9 @@ class run_thread(QThread):
         if len(self.boxes):
             sam_results = sam_model(self.link, bboxes=self.boxes, save=True)
             segments = sam_results[0].masks.xyn  # noqa
+            name = self.link.split("/")[-1][:-4]
 
-            with open(f'labels/{self.link[-1][:-4]}.txt', 'w') as f:
+            with open(f'labels/{name}.txt', 'w') as f:
                 for i in range(len(segments)):
                     s = segments[i]
                     if len(s) == 0:

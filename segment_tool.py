@@ -82,6 +82,7 @@ class MainWindow(QMainWindow):
             self.lb0[i].deleteLater()
         self.lb0 = []
         self.rec_list = []
+        self.cls = []
         self.make_rec()
 
     def mouseReleaseEvent(self, event):
@@ -130,7 +131,7 @@ class run_thread(QThread):
     def run(self):
         sam_model = SAM('sam_b.pt')
         if len(self.boxes):
-            sam_results = sam_model(self.link, bboxes=self.boxes, show=True)
+            sam_results = sam_model(self.link, bboxes=self.boxes, save=True)
             segments = sam_results[0].masks.xyn  # noqa
             name = self.link.split("/")[-1][:-4]
 

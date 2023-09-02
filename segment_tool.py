@@ -110,9 +110,9 @@ class MainWindow(QMainWindow):
 
     def export_data(self):
         print("export", self.rec_list)
-        class_ids = self.cls
-        link = self.link_file[0]
-        boxes = self.rec_list  # Boxes object for bbox outputs
+        class_ids = self.cls  # list clas of image
+        link = self.link_file[0]  # link to image
+        boxes = self.rec_list  # list Boxes object for bbox outputs
 
         self.thread[1] = run_thread(index=1, class_ids=class_ids, link=link, boxes=boxes)
         self.thread[1].start()
@@ -130,7 +130,7 @@ class run_thread(QThread):
     def run(self):
         sam_model = SAM('sam_b.pt')
         if len(self.boxes):
-            sam_results = sam_model(self.link, bboxes=self.boxes, save=True)
+            sam_results = sam_model(self.link, bboxes=self.boxes, show=True)
             segments = sam_results[0].masks.xyn  # noqa
             name = self.link.split("/")[-1][:-4]
 

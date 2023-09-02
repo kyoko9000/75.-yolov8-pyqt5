@@ -38,6 +38,9 @@ class Mylabel(QLabel):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.uic = Ui_MainWindow()
+        self.uic.setupUi(self)
+
         self.cls = []
         self.rec = None
         self.link_file = None
@@ -46,8 +49,6 @@ class MainWindow(QMainWindow):
         self.lb = None
         self.lb0 = []
         self.rec_list = []
-        self.uic = Ui_MainWindow()
-        self.uic.setupUi(self)
 
         self.uic.pushButton.clicked.connect(self.load_pic)
         self.uic.pushButton_2.clicked.connect(self.make_rec)

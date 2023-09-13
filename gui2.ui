@@ -17,11 +17,16 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>500</y>
-      <width>81</width>
-      <height>31</height>
+      <x>20</x>
+      <y>490</y>
+      <width>101</width>
+      <height>71</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>load pic</string>
@@ -31,10 +36,15 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>500</y>
-      <width>81</width>
-      <height>31</height>
+      <y>490</y>
+      <width>111</width>
+      <height>71</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>draw rec</string>
@@ -62,11 +72,16 @@
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>500</y>
-      <width>81</width>
-      <height>31</height>
+      <x>420</x>
+      <y>490</y>
+      <width>111</width>
+      <height>71</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>delete rec</string>
@@ -75,11 +90,16 @@
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>540</x>
-      <y>500</y>
-      <width>81</width>
-      <height>31</height>
+      <x>560</x>
+      <y>490</y>
+      <width>111</width>
+      <height>71</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>export rec</string>
@@ -88,11 +108,16 @@
    <widget class="QPushButton" name="pushButton_5">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>500</y>
-      <width>81</width>
-      <height>31</height>
+      <x>290</x>
+      <y>490</y>
+      <width>101</width>
+      <height>71</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>add rec</string>
@@ -101,11 +126,16 @@
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>450</y>
-      <width>113</width>
-      <height>22</height>
+      <x>210</x>
+      <y>430</y>
+      <width>181</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
     </property>
    </widget>
   </widget>

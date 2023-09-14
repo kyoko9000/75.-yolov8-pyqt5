@@ -1,7 +1,7 @@
 import sys
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
-from gui2 import Ui_MainWindow
+from gui import Ui_MainWindow
 
 
 class MainWindow(QMainWindow):
@@ -10,8 +10,8 @@ class MainWindow(QMainWindow):
         self.path = None
         self.uic = Ui_MainWindow()
         self.uic.setupUi(self)
-        self.uic.pushButton.clicked.connect(self.open)
-        self.uic.pushButton_2.clicked.connect(self.save)
+        self.uic.Button_start.clicked.connect(self.open)
+        self.uic.Button_stop.clicked.connect(self.save)
 
     def open(self):
         # default_path = "D:/2. Python projects"

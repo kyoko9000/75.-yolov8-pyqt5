@@ -23,7 +23,7 @@ class MainWindow(QMainWindow):
     def start_yolo(self):
         self.thread[1] = yolo_project(index=1)
         self.thread[1].start()
-        self.thread[1].signal.connect(self.show_wedcam)
+        # self.thread[1].signal.connect(self.show_wedcam)
 
     def show_wedcam(self, cv_img):
         """Updates the image_label with a new opencv image"""
@@ -52,15 +52,21 @@ class yolo_project(QThread):
 
     def run(self):
         model = YOLO("yolov8n.pt")  # load a pretrained model (recommended for training)
-        results = model('video.mp4', show=True, stream=True, verbose=False)  # List of Results objects
+        results = model('video.mp4', stream=True, verbose=False)  # List of Results objects
+        for result in results:
+            annotated_frame = result[0].plot()
 
-        for result, frame in results:
+            # Display the annotated frame
+            cv2.imshow("YOLOv8 Inference", annotated_frame)
+            cv2.waitKey(1)
+
+            # frame = result.orig_img
             # boxes = result[0].boxes.numpy()  # Boxes object for bbox outputs
             # for box in boxes:  # there could be more than one detection
             #     print("class", box.cls)
             #     print("xyxy", box.xyxy)
             #     print("conf", box.conf)
-            self.signal.emit(frame)
+            # self.signal.emit(frame)
 
 
 if __name__ == "__main__":
@@ -68,3 +74,40 @@ if __name__ == "__main__":
     main_win = MainWindow()
     main_win.show()
     sys.exit(app.exec())
+
+# import cv2
+# from ultralytics import YOLO
+#
+# # Load the YOLOv8 model
+# model = YOLO('yolov8n.pt')
+#
+# # Open the video file
+# video_path = "video.mp4"
+# cap = cv2.VideoCapture(video_path)
+#
+# # Loop through the video frames
+# while cap.isOpened():
+#     # Read a frame from the video
+#     success, frame = cap.read()
+#
+#     if success:
+#         # Run YOLOv8 inference on the frame
+#         results = model(frame)
+#         print("llll", results[0])
+#
+#         # Visualize the results on the frame
+#         annotated_frame = results[0].plot()
+#
+#         # Display the annotated frame
+#         cv2.imshow("YOLOv8 Inference", annotated_frame)
+#
+#         # Break the loop if 'q' is pressed
+#         if cv2.waitKey(1) & 0xFF == ord("q"):
+#             break
+#     else:
+#         # Break the loop if the end of the video is reached
+#         break
+#
+# # Release the video capture object and close the display window
+# cap.release()
+# cv2.destroyAllWindows()

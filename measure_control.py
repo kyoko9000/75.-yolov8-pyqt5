@@ -13,7 +13,8 @@ def show_frame():
     cv2.waitKey(1)
 
 
-for result, frame in results:
+for result in results:
+    frame = result.plot()
     show_frame()
     # boxes = result[0].boxes.numpy()  # Boxes object for bbox outputs
     # for box in boxes:  # there could be more than one detection

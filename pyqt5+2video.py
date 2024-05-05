@@ -56,9 +56,10 @@ class live_stream(QThread):
 
     def run(self):
         model = YOLO("yolov8n.pt")  # load a pretrained model (recommended for training)
-        results = model(f'video{self.index}.mp4', show=True, stream=True)  # List of Results objects
+        results = model(f'video{self.index}.mp4', stream=True)  # List of Results objects
 
-        for result, frame in results:
+        for result in results:
+            frame = result.plot()
             # boxes = result[0].boxes.numpy()  # Boxes object for bbox outputs
             # for box in boxes:  # there could be more than one detection
             #     print("class", box.cls)

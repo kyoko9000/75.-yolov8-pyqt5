@@ -107,12 +107,12 @@ class live_stream(QThread):
 
     def run(self):
         model = YOLO("yolov8n.pt")  # load a pretrained model (recommended for training)
-        results = model('video1.mp4', show=True, stream=True)  # List of Results objects
+        results = model('video1.mp4', stream=True)  # List of Results objects
 
-        for result, frame in results:
+        for result in results:
+            frame = result.plot()
             self.signal.emit(frame)
             if self.pic:
-                print(frame.shape)
                 print(self.data)
 
                 y0 = int(self.data[0]*3)

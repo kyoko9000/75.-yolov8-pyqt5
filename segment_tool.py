@@ -138,9 +138,11 @@ class run_thread(QThread):
             with open(f'labels/{name}.txt', 'w') as f:
                 for i in range(len(segments)):
                     s = segments[i]
+                    print("s", s)
                     if len(s) == 0:
                         continue
                     segment = map(str, segments[i].reshape(-1).tolist())
+                    print("segment", segment)
                     f.write(f'{self.class_ids[i]} ' + ' '.join(segment) + '\n')
 
 
